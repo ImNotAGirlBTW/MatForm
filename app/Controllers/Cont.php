@@ -3,51 +3,47 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Books;
 
 class Cont extends BaseController
 {
-
+    private $dompdf;
+    private $booksModel;
+    
     function __construct(){
         $this->dompdf = new \Dompdf\Dompdf();
+        $this->booksModel = new Books();
     }
+
     public function getList() {
-        // $value1 and $value2 will contain the checked values
-        // Implement your redirect logic or other processing here
-        echo view('listView');
+        return view('listView');
     }
 
+    function getForm() {
+        $data['books'] = $this->booksModel->findAll();
 
-    function getForm()
-    {
-        $data["button"] = 
-        '<form action="'. base_url('makePDF').'">
-        <button type="submit">Vytvoř PDF</button>
-        </form>';
-      //  $data["seznam"] = $this->mod->loadData();   
-        echo view('formView',$data);
-    }
+        //depricated 
+        if($this->request->getMethod() === "post") {
+            //vemu data z formulare 
+            $values = $this->request->getPost();
+            //cyklem projedeme array hodnot id z formy
+            $records = array();
+            foreach($values as $key=>$val) {
+                $id = $key;
+                $records[] = $this->booksModel->where('id', $id)->get()->getResult()[0];
+            }
 
-    public function genPdf() {
+            $view = view('listView', ['books' => $records]);
+            $this->dompdf->loadHtml($view);
 
-        if ($this->request->isAJAX()) {
-            $data = $this->request->getPost('data');
+            $this->dompdf->setPaper('A4','portait');
+    
+            $this->dompdf->render();
+    
+            $this->dompdf->stream('SnadNeVirus', array("Attachment"=>0));
 
-            
         }
 
-        //
-        //return json_encode(['message'=>'Success!']);
-    }
-    
-    public function CreatePDF(){
-        $html = view('formView');
-          
-       $this->dompdf->loadHtml($html);
-
-        $this->dompdf->setPaper('A4','portait');
-
-        $this->dompdf->render();
-
-        $this->dompdf->stream('SnadNeVirus', array("Attachment"=>0));
+        return view('formView', $data);
     }
 }
