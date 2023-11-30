@@ -1,4 +1,13 @@
-<h1>Váš seznam četby</h1>
+
+
+<?= $this->extend('layouts/master');?>
+
+<?= $this->section('content')?>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+        <h1>Váš seznam četby</h1>
     
     <table class="table">
         <thead>
@@ -7,9 +16,14 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($data as $one): ?>   
+            <?php foreach($books as $one): ?>   
                 <tr>
-                    <th><?= $one; ?></th>
+                    <th><?= $one->title; ?></th>
                 </tr>
             <?php endforeach; ?>
     </table>
+        </div>
+    </div>
+</div>
+
+<?= $this->endSection();?>
