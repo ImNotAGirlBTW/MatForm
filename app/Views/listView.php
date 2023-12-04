@@ -18,7 +18,7 @@
         <tbody>
             <?php foreach($books as $one): ?>   
                 <tr>
-                    <th><?= $one->title; ?></th>
+                    <th><?= $one->Nazev; ?></th>
                 </tr>
             <?php endforeach; ?>
     </table>
