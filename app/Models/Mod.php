@@ -41,7 +41,7 @@ return $data;
     function loadConditions()
     {
         $builder = $this->db->table('okruh');
-        $builder->select('*');
+        $builder->select('*,okruh.nazev as okruh, zanr.nazev as zanr, zanr.pocet as zPocet, okruh.pocet as oPocet');
         $builder->orderBy('idOkruh');
         $builder->join('zanr','idZanr=idOkruh','left');
         $data = $builder->get()->getResult();

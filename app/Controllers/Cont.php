@@ -35,8 +35,8 @@ class Cont extends BaseController
             $records = array();
             foreach ($values as $key => $val) {
                 $id = $key;
-                //$records[] = $this->booksModel->where('idKniha', $id)->get()->getResult()[0];
-                $records[] = $this->mod->getSelBooks($id);
+                $records[] = $this->booksModel->where('idKniha', $id)->get()->getResult()[0];
+               // $records[] = $this->mod->getSelBooks($id);
             }
        
 

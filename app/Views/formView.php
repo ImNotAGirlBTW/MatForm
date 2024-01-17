@@ -49,66 +49,75 @@ foreach ($books as $cond) {
 </div>
 
 <script>
-
 const conditions1 = <?= $conditionsJson ?>;
-let metConditions =false;
+console.log(conditions1);
+let metConditions = false;
 var cond = [];
-for(let i=0; i < conditions1.length; i++){
-     cond[i] = conditions1[i].PozadovanyPocet;
+for (let i = 0; i < conditions1.length; i++) {
+    cond[i] = conditions1[i].PozadovanyPocet;
 }
-
-
 
 function handleOnClick() {
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
-const checkedValues = checkedCheckboxes.map(checkbox => checkbox.value);
-//const bookGen = [... new Set(checkedValues)];
-checkSelectedBooks(checkedValues);
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+    const checkedValues = checkedCheckboxes.map(checkbox => checkbox.value);
+    const selectedValues = [];
 
-
-    
-}
-
-function checkSelectedBooks(checkedValues) {
-    const genreCounts = {};
-
-    checkedValues.forEach(genre => {
-        genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+    checkedValues.forEach(val => {
+        const [okruh, zanr] = val.split("-");
+        selectedValues.push({ okruh, zanr });
     });
+    console.log(selectedValues);
+    checkSelectedBooks(selectedValues);
+}
+function checkSelectedBooks(selectedValues) {
+    let metConditions;
+    let zanrArray=[];
+    let okruhArray=[];
 
-   
     for (const condition of conditions1) {
-        const selectedCount = genreCounts[condition.okruh] || 0;
-        const requiredCount = parseInt(condition.PozadovanyPocet, 10);
-        const remainingNeeded = Math.max(0, requiredCount - selectedCount);
+        const oPocet = parseInt(condition.oPocet, 10); // Pro Okruh
+        const zPocet = parseInt(condition.zPocet, 10); // Pro Žánr
 
+        const okruh = condition.okruh;
+        const zanr = condition.zanr;
       
-        const countElement = document.getElementById(`${condition.okruh}_count`);
         
-        if (countElement) {
-            countElement.innerHTML = `${remainingNeeded} potřeba`;
+    }
+    for (const val of selectedValues){
+            zanrArray.push(val.zanr);
+            okruhArray.push(val.okruh);
         }
 
-        
+        for (const condition of conditions1) {
+        const zPocet = parseInt(condition.zPocet, 10);
+        const oPocet = parseInt(condition.oPocet, 10);
 
-        if (selectedCount < requiredCount && remainingNeeded > 0) {
-            console.log(`Pro ${condition.okruh}. Potřeba: ${requiredCount}, Vybráno: ${selectedCount}, Zbývá: ${remainingNeeded}`);
-     
+        const zanrCount = zanrArray.filter(zanr => zanr === condition.zanr).length;
+        const okruhCount = okruhArray.filter(okruh => okruh === condition.okruh).length;
+
+        if (zanrCount < zPocet && okruhCount < oPocet) {
+            metConditions = false;
+            console.log(`Žánr: ${condition.zanr}, Okruh: ${condition.okruh} nesplňuje podmínky.`);
         }else{
-            metConditions= true;
+            metConditions=true;
         }
+    }
+        console.log("Zanr "  + zanrArray+ ", okruh " + okruhArray);
+        console.log(metConditions);
+
 
 }
-}
+
+
 function validateForm() {
     console.log("Form validation result:", metConditions);
-    alert("Nesplněné podmínky!!");
+    if(!metConditions){
+        alert("Nesplněné podmínky!!");
+    }
+    
     return metConditions;
 }
-
-
-
 
 
 </script>
