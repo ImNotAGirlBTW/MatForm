@@ -5,13 +5,15 @@
 <div class="row">
         <div class="col-12">
 <?php
-foreach($conditions as $cond){
-    echo '<table class ="table">';
-    echo '<th scope="row"';
+foreach ($books as $cond) {
+    echo '<table class="table">';
+    echo '<tr>'; 
+    echo '<th scope="row">';
     echo '<td>';
-    echo $cond->Popis ." ". $cond->okruh; 
+    echo $cond->Popis . '<div id="' . $cond->okruh . '_count">' . $cond->oPocet . '</div>' . " " . $cond->okruh;
     echo '</td>';
     echo '</th>';
+    echo '</tr>'; 
     echo '</table>';
 }
 ?>
@@ -21,7 +23,7 @@ foreach($conditions as $cond){
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form method="POST" action="<?= base_url(''); ?>">
+            <form method="POST" action="<?= base_url(''); ?>" onsubmit=" return validateForm()" >
                 <?php 
                 $currentCategory = null;
                     foreach($books as $book):
@@ -31,16 +33,92 @@ foreach($conditions as $cond){
                         }
                 ?>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="<?= $book->idKniha ?>" name="<?= $book->idKniha; ?>">
-                        <label class="form-check-label" for="<?= $book->idKniha ?>"><?=$book->Autor ." -- ".$book->Nazev?></label>
+                        <input type="checkbox" class="form-check-input"  value="<?=$book->okruh . "-" . $book->zanr?>" id="<?= $book->idKniha ?>" name="<?= $book->idKniha;?>"onclick="handleOnClick()">
+                        <label class="form-check-label" for="<?= $book->idKniha ?>"><?=$book->autor ." <-- ".$book->nazev?></label>
                     </div>
                 <?php 
                     endforeach;
                 ?>
-                <button type="submit" class="btn btn-primary">Vytiskni</button>
+             
+                <button id="butt"  class="btn btn-primary">Vytiskni</button>
+
+               
             </form>
         </div>
     </div>
 </div>
 
+<script>
+const conditions1 = <?= $conditionsJson ?>;
+console.log(conditions1);
+let metConditions = false;
+var cond = [];
+for (let i = 0; i < conditions1.length; i++) {
+    cond[i] = conditions1[i].PozadovanyPocet;
+}
+
+function handleOnClick() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+    const checkedValues = checkedCheckboxes.map(checkbox => checkbox.value);
+    const selectedValues = [];
+
+    checkedValues.forEach(val => {
+        const [okruh, zanr] = val.split("-");
+        selectedValues.push({ okruh, zanr });
+    });
+    console.log(selectedValues);
+    checkSelectedBooks(selectedValues);
+}
+function checkSelectedBooks(selectedValues) {
+    let metConditions;
+    let zanrArray=[];
+    let okruhArray=[];
+
+    for (const condition of conditions1) {
+        const oPocet = parseInt(condition.oPocet, 10); // Pro Okruh
+        const zPocet = parseInt(condition.zPocet, 10); // Pro Žánr
+
+        const okruh = condition.okruh;
+        const zanr = condition.zanr;
+      
+        
+    }
+    for (const val of selectedValues){
+            zanrArray.push(val.zanr);
+            okruhArray.push(val.okruh);
+        }
+
+        for (const condition of conditions1) {
+        const zPocet = parseInt(condition.zPocet, 10);
+        const oPocet = parseInt(condition.oPocet, 10);
+
+        const zanrCount = zanrArray.filter(zanr => zanr === condition.zanr).length;
+        const okruhCount = okruhArray.filter(okruh => okruh === condition.okruh).length;
+
+        if (zanrCount < zPocet && okruhCount < oPocet) {
+            metConditions = false;
+            console.log(`Žánr: ${condition.zanr}, Okruh: ${condition.okruh} nesplňuje podmínky.`);
+        }else{
+            metConditions=true;
+        }
+    }
+        console.log("Zanr "  + zanrArray+ ", okruh " + okruhArray);
+        console.log(metConditions);
+
+
+}
+
+
+function validateForm() {
+    console.log("Form validation result:", metConditions);
+    if(!metConditions){
+        alert("Nesplněné podmínky!!");
+    }
+    
+    return metConditions;
+}
+
+
+</script>
 <?= $this->endSection();?>
