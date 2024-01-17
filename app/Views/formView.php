@@ -71,7 +71,6 @@ function handleOnClick() {
     checkSelectedBooks(selectedValues);
 }
 function checkSelectedBooks(selectedValues) {
-    let metConditions;
     let zanrArray=[];
     let okruhArray=[];
 
