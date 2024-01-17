@@ -71,10 +71,6 @@ function handleOnClick() {
     checkSelectedBooks(selectedValues);
 }
 function checkSelectedBooks(selectedValues) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 3402012598150b2aa7d2d67ce79671c3335400a9
     let zanrArray=[];
     let okruhArray=[];
 
