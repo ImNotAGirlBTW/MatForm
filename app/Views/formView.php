@@ -23,7 +23,7 @@ foreach ($books as $cond) {
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form method="POST" action="<?= base_url(''); ?>" onsubmit=" return validateForm()" >
+            <form method="POST" action="<?= base_url(''); ?>"  onsubmit="return validateForm()"> >
                 <?php 
                 $currentCategory = null;
                     foreach($books as $book):
@@ -71,6 +71,10 @@ function handleOnClick() {
     checkSelectedBooks(selectedValues);
 }
 function checkSelectedBooks(selectedValues) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3402012598150b2aa7d2d67ce79671c3335400a9
     let zanrArray=[];
     let okruhArray=[];
 
