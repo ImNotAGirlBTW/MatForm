@@ -5,6 +5,7 @@
 <div class="row">
         <div class="col-12">
 <?php
+echo '<img src="http://localhost:80/MatForm/images/pozadi_OAUH.jpeg">';
 foreach ($conditions as $cond) {
     echo '<table class="table">';
     echo '<tr>'; 
@@ -35,7 +36,7 @@ foreach ($conditions as $cond) {
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form method="POST" action="<?= base_url(''); ?>"  onsubmit="return validateForm()"> >
+            <form method="POST" action="<?= base_url(''); ?>"  onsubmit="return validateForm()"> 
                 <?php 
                 $currentCategory = null;
                     foreach($books as $book):

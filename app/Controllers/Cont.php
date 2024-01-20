@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Books;
 use App\Models\Conditions;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Cont extends BaseController
 {
@@ -14,10 +16,15 @@ class Cont extends BaseController
     private $condModel;
     function __construct()
     {
-        $this->dompdf = new \Dompdf\Dompdf();
+       // $this->dompdf = new \Dompdf\Dompdf(array('enable_remote' => true));
         $this->booksModel = new Books();
         $this->condModel = new Conditions();
         $this->mod = new \App\Models\Mod;
+
+$options = new Options();
+$options->set('isHtml5ParserEnabled', true);
+$options->set('isPhpEnabled', true);
+$this->dompdf = new Dompdf($options);
     }
 
     public function getList()
