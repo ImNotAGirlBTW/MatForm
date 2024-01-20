@@ -5,12 +5,25 @@
 <div class="row">
         <div class="col-12">
 <?php
-foreach ($books as $cond) {
+echo '<img src="http://localhost:80/MatForm/images/pozadi_OAUH.jpeg">';
+foreach ($conditions as $cond) {
     echo '<table class="table">';
     echo '<tr>'; 
     echo '<th scope="row">';
     echo '<td>';
-    echo $cond->Popis . '<div id="' . $cond->okruh . '_count">' . $cond->oPocet . '</div>' . " " . $cond->okruh;
+    echo $cond['popis'] . '<div id="' . $cond['okruh'] . '_count">' . $cond['oPocet'] . '</div>' . " " . $cond['okruh'];
+    echo '</td>';
+    echo '</th>';
+    echo '</tr>'; 
+    echo '</table>';
+}
+
+foreach ($conditions as $cond) {
+    echo '<table class="table">';
+    echo '<tr>'; 
+    echo '<th scope="row">';
+    echo '<td>';
+    echo $cond['popis'] . '<div id="' . $cond['zanr'] . '_count">' . $cond['zPocet'] . '</div>' . " " . $cond['zanr'];
     echo '</td>';
     echo '</th>';
     echo '</tr>'; 
@@ -23,7 +36,7 @@ foreach ($books as $cond) {
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form method="POST" action="<?= base_url(''); ?>"  onsubmit="return validateForm()"> >
+            <form method="POST" action="<?= base_url(''); ?>"  onsubmit="return validateForm()"> 
                 <?php 
                 $currentCategory = null;
                     foreach($books as $book):
@@ -50,7 +63,6 @@ foreach ($books as $cond) {
 
 <script>
 const conditions1 = <?= $conditionsJson ?>;
-console.log(conditions1);
 let metConditions = false;
 var cond = [];
 for (let i = 0; i < conditions1.length; i++) {

@@ -37,7 +37,7 @@ return $data;
 
 
     }
-
+/** 
     function loadConditions()
     {
         $builder = $this->db->table('okruh');
@@ -47,6 +47,8 @@ return $data;
         $data = $builder->get()->getResult();
         return $data;
     }
+
+    */
 function getSelBooks($id){
     $builder = $this->db->table('kniha');
     $builder = $this->db->table('kniha'); 
