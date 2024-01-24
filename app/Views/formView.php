@@ -1,11 +1,19 @@
 <?= $this->extend('layouts/master');?>
 
 <?= $this->section('content')?>
-<div class="container">
-<div class="row">
-        <div class="col-12">
+<style>
+    .table-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .table {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+</style>
+<div class="table-container">
 <?php
-echo '<img src="http://localhost:80/MatForm/images/pozadi_OAUH.jpeg">';
 foreach ($conditions as $cond) {
     echo '<table class="table">';
     echo '<tr>'; 
@@ -30,8 +38,6 @@ foreach ($conditions as $cond) {
     echo '</table>';
 }
 ?>
-</div>
-</div>
 </div>
 <div class="container">
     <div class="row">
@@ -63,11 +69,13 @@ foreach ($conditions as $cond) {
 
 <script>
 const conditions1 = <?= $conditionsJson ?>;
+const conditions2 = <?= $LengthJson?>;
 let metConditions = false;
 var cond = [];
 for (let i = 0; i < conditions1.length; i++) {
     cond[i] = conditions1[i].PozadovanyPocet;
 }
+var condPocet = conditions2[0].pocet;
 
 function handleOnClick() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -79,7 +87,6 @@ function handleOnClick() {
         const [okruh, zanr] = val.split("-");
         selectedValues.push({ okruh, zanr });
     });
-    console.log(selectedValues);
     checkSelectedBooks(selectedValues);
 }
 function checkSelectedBooks(selectedValues) {
@@ -87,8 +94,8 @@ function checkSelectedBooks(selectedValues) {
     let okruhArray=[];
 
     for (const condition of conditions1) {
-        const oPocet = parseInt(condition.oPocet, 10); // Pro Okruh
-        const zPocet = parseInt(condition.zPocet, 10); // Pro Žánr
+        const oPocet = parseInt(condition.oPocet, 10); 
+        const zPocet = parseInt(condition.zPocet, 10); 
 
         const okruh = condition.okruh;
         const zanr = condition.zanr;
@@ -103,20 +110,24 @@ function checkSelectedBooks(selectedValues) {
         for (const condition of conditions1) {
         const zPocet = parseInt(condition.zPocet, 10);
         const oPocet = parseInt(condition.oPocet, 10);
-
         const zanrCount = zanrArray.filter(zanr => zanr === condition.zanr).length;
         const okruhCount = okruhArray.filter(okruh => okruh === condition.okruh).length;
+          
+        document.getElementById(`${condition.okruh}_count`).textContent = `${oPocet - okruhCount}`;
+        document.getElementById(`${condition.zanr}_count`).textContent = `${zPocet - zanrCount}`;
 
-        if (zanrCount < zPocet && okruhCount < oPocet) {
+
+        if (zanrCount >= zPocet && okruhCount >= oPocet && selectedValues.length == condPocet) {
+            metConditions = true;
+        }else{
             metConditions = false;
             console.log(`Žánr: ${condition.zanr}, Okruh: ${condition.okruh} nesplňuje podmínky.`);
-        }else{
-            metConditions=true;
         }
     }
         console.log("Zanr "  + zanrArray+ ", okruh " + okruhArray);
         console.log(metConditions);
 
+        
 
 }
 
