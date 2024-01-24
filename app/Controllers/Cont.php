@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Books;
 use App\Models\Conditions;
+use App\Models\Conditions2;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -14,11 +15,13 @@ class Cont extends BaseController
     private $booksModel;
     private $mod;
     private $condModel;
+    private $condModel2;
     function __construct()
     {
        // $this->dompdf = new \Dompdf\Dompdf(array('enable_remote' => true));
         $this->booksModel = new Books();
         $this->condModel = new Conditions();
+        $this->condModel2 = new Conditions2();
         $this->mod = new \App\Models\Mod;
 
 $options = new Options();
@@ -37,6 +40,7 @@ $this->dompdf = new Dompdf($options);
         // $data['books'] = $this->booksModel->findAll();
         $data['books'] = $this->mod->LoadData();
         $data['conditionsJson'] = json_encode($this->condModel->loadConditions());
+        $data['LengthJson'] = json_encode($this->condModel2->findAll());
         $data['conditions'] = $this->condModel->loadConditions();
         //depricated 
         if ($this->request->getMethod() === "post") {

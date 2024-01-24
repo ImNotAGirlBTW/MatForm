@@ -12,7 +12,6 @@ class Conditions extends Model {
     {
         // Assuming you have relationships defined in the model
         $this->join('zanr', 'zanr.idZanr = okruh.idOkruh', 'left');
-        
         // Selecting necessary columns
         $this->select('*, zanr.nazev as zanr, zanr.pocet as zPocet, okruh.nazev as okruh, okruh.pocet as oPocet');
         
@@ -25,4 +24,11 @@ class Conditions extends Model {
         return $data;
     }
 
+    public function  loadConditions2(){
+        $this->table('podminky'); 
+        $this->select('popis,pocet');
+        $data = $this->findAll();
+        
+        return $data;
+    }
 }
