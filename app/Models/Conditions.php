@@ -8,27 +8,20 @@ class Conditions extends Model {
     protected $table = 'okruh';
 
     public function loadConditions()
-
     {
-        // Assuming you have relationships defined in the model
-        $this->join('zanr', 'zanr.idZanr = okruh.idOkruh', 'left');
-        // Selecting necessary columns
-        $this->select('*, zanr.nazev as zanr, zanr.pocet as zPocet, okruh.nazev as okruh, okruh.pocet as oPocet');
+        // Retrieve data from the 'okruh' table
+        $this->table('okruh');
+        $this->select('*, nazev as okruh, pocet as oPocet');
+        $okruhData = $this->findAll();
+    
+        // Retrieve data from the 'zanr' table
+        $zanrModel = new Zanr(); // Assuming the model for 'zanr' is ZanrModel
         
-        // Ordering by idOkruh (adjust if needed)
-        $this->orderBy('okruh.idOkruh');
-
-        // Getting the result
-        $data = $this->findAll();
-
-        return $data;
-    }
-
-    public function  loadConditions2(){
-        $this->table('podminky'); 
-        $this->select('popis,pocet');
-        $data = $this->findAll();
-        
-        return $data;
+        $zanrData = $zanrModel->select('*, nazev as zanr, pocet as zPocet')->findAll();
+    
+        // Merge the results
+        $mergedData = array_merge($okruhData, $zanrData);
+    
+        return $mergedData;
     }
 }
