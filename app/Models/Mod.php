@@ -10,7 +10,7 @@ class Mod extends Model
     function __construct(){
         $this->db = \Config\Database::connect();
     }
-/** 
+/* 
    function poadData()
     {
 $builder = $this->db->table('kniha'); 
@@ -25,7 +25,7 @@ $data = $builder->get()->getResult();
 return $data;
     }
 */
-    function LoadData(){
+   /* function LoadData(){
         $builder = $this->db->table('kniha');
 
         $builder->select('*,okruh.nazev as okruh,okruh.pocet as oPocet,zanr.nazev as zanr,zanr.pocet as zPocet');
@@ -34,10 +34,10 @@ return $data;
         $builder->orderBy('idZanr');
         $data = $builder->get()->getResult();
         return $data;
-
-
-    }
-/** 
+   }
+*/
+    
+/* 
     function loadConditions()
     {
         $builder = $this->db->table('okruh');
