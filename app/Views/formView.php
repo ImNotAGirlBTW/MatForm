@@ -103,7 +103,6 @@ function checkSelectedBooks(selectedValues) {
 
         const okruh = condition.okruh || '';
         const zanr = condition.zanr || '';
-
         okruhCounts[okruh] = 0;
         if (zanr) {
             zanrCounts[zanr] = 0;
@@ -121,25 +120,33 @@ function checkSelectedBooks(selectedValues) {
     }
 
     for (const condition of conditions1) {
-        const oPocet = parseInt(condition.oPocet, 10);
-        const zPocet = condition.zanr ? parseInt(condition.zPocet, 10) : 0;
+    const oPocet = parseInt(condition.pocet, 10);
+    const zPocet = condition.zanr ? parseInt(condition.pocet, 10) : 0;
 
-        const okruhCount = okruhCounts[condition.okruh];
-        const zanrCount = condition.zanr ? zanrCounts[condition.zanr] : 0;
-
+    if (condition.okruh) {
+        const okruhCount = okruhCounts[condition.okruh] || 0;
         document.getElementById(`${condition.okruh}_count`).textContent = `${oPocet - okruhCount}`;
-        if (condition.zanr) {
-            document.getElementById(`${condition.zanr}_count`).textContent = `${zPocet - zanrCount}`;
-        }
 
-        if (zanrCount >= zPocet && okruhCount >= oPocet && selectedValues.length == condPocet) {
+        if (okruhCount >= oPocet && selectedValues.length == condPocet) {
             metConditions = true;
         } else {
             metConditions = false;
-            console.log(`Okruh: ${condition.okruh}, Zanr: ${condition.zanr} nesplňuje podmínky.`);
+            console.log(`Okruh: ${condition.okruh} nesplňuje podmínky.`);
         }
     }
 
+    if (condition.zanr) {
+        const zanrCount = zanrCounts[condition.zanr] || 0;
+        document.getElementById(`${condition.zanr}_count`).textContent = `${zPocet - zanrCount}`;
+
+        if (zanrCount >= zPocet && selectedValues.length == condPocet) {
+            metConditions = true;
+        } else {
+            metConditions = false;
+            console.log(`Zanr: ${condition.zanr} nesplňuje podmínky.`);
+        }
+    }
+}
     console.log("Zanr " + zanrArray + ", okruh " + okruhArray);
     console.log(metConditions);
 }
