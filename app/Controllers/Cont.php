@@ -57,6 +57,7 @@ $this->dompdf = new Dompdf($options);
         $data['books'] = $this->LoadModel->LoadData();
         $data['conditionsJson'] = json_encode($this->condModel->loadConditions());
         $data['LengthJson'] = json_encode($this->condModel2->findAll());
+        $data['conditions2'] = $this->condModel2->findAll();
         $data['conditions'] = $this->condModel->loadConditions();
         $data['okruh'] = $this->okruhModel->FindAll();
         $data['zanr'] = $this->zanrModel->FindAll();
