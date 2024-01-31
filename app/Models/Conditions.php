@@ -9,17 +9,16 @@ class Conditions extends Model {
 
     public function loadConditions()
     {
-        // Retrieve data from the 'okruh' table
         $this->table('okruh');
+
         $this->select('*, nazev as okruh, pocet as oPocet');
+        
         $okruhData = $this->findAll();
     
-        // Retrieve data from the 'zanr' table
-        $zanrModel = new Zanr(); // Assuming the model for 'zanr' is ZanrModel
+        $zanrModel = new Zanr(); 
         
         $zanrData = $zanrModel->select('*, nazev as zanr, pocet as zPocet')->findAll();
     
-        // Merge the results
         $mergedData = array_merge($okruhData, $zanrData);
     
         return $mergedData;

@@ -65,7 +65,7 @@ foreach ($conditions2 as $cond){
                 ?>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input"  value="<?=$book->okruh . "-" . $book->zanr?>" id="<?= $book->idKniha ?>" name="<?= $book->idKniha;?>"onclick="handleOnClick()">
-                        <label class="form-check-label" for="<?= $book->idKniha ?>"><?=$book->autor ." <-- ".$book->nazev?></label>
+                        <label class="form-check-label" for="<?= $book->idKniha ?>"><?=$book->autor ." <-- ".$book->kniha ." -->" ?><strong><?= $book->zanr?></strong></label>
                     </div>
                 <?php 
                     endforeach;
@@ -80,7 +80,6 @@ foreach ($conditions2 as $cond){
 </div>
 
 <script>
-    //*Zkus změnit conditionsJson na zanrCond a okruh cond, pošli dva listy do dvou forcyklů */
 const conditions1 = <?= $conditionsJson ?>;
 const conditions2 = <?= $LengthJson?>;
 let allConndition = [];
