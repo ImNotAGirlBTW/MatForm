@@ -1,36 +1,78 @@
 
-
-<?= $this->extend('layouts/master');?>
+<?= $this->extend('layouts/pdfLay');?>
 
 <?= $this->section('content')?>
-<?php $png = file_get_contents(base_url("images/logo.png"));
+<?php
+     $count = 1;
+    $png = file_get_contents(base_url("images/logo2.png"));
     $pngbase64 = base64_encode($png);?>
+    <body>
 <div>
-<img src='data:image;base64,<?= $pngbase64?>' alt="">
-<p>ll</p>
+<img src='data:image;base64,<?= $pngbase64?>' alt="oauhLogo">
 </div>
     
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            
-        <h1>Váš seznam četby</h1>
-        
+        <div class="col-12">    
+        <h1>Žákovský seznam literárních děl k maturitní zkoušce</h1>
+        <table class="informace">
+    <tr>
+        <th>
+            Jméno:
+        </th>
+        <td>
+
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            Třída:
+        </th>
+        <td>
+
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            Školní rok:
+        </th>
+        <td>
+
+        </td>
+    </tr>
+        </table>
+        <br>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th>
+                    
+                </th>
+                <th>Autor: Dílo</th>
+                <th>Okruh</th>
+                <th>Poezie</th>
+                <th>Drama</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach($books as $one): ?>   
+
+            <?php foreach($books as $one): ?> 
+                    
                 <tr>
-                    <th><?= $one->nazev; ?></th>
-                </tr>
+                <th><?=$count ++?></th>
+                <th><?= $one->nazev . " : " . $one->autor; ?></th>
+                <th><?= $one->okruh?></th>
+                <th></th>
+                <th></th>
             <?php endforeach; ?>
     </table>
         </div>
     </div>
 </div>
-
+<br>
+<div class="podpis">
+<p>.................................</p>
+<p>Datum a podpis žáka</p>
 <?= $this->endSection();?>

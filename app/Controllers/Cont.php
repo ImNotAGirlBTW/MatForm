@@ -49,6 +49,14 @@ $this->dompdf = new Dompdf($options);
         return view('insertView');
     }
 
+    public function showInsertForm() {
+
+        $data['zanrOptions'] = $this->zanrModel->findAll();
+        $data['okruhOptions'] = $this->okruhModel->findAll();
+
+        echo view('insertView2', $data);
+    }
+
     function getForm()
     {
         // $data['books'] = $this->booksModel->findAll();
@@ -57,18 +65,23 @@ $this->dompdf = new Dompdf($options);
         $data['books'] = $this->LoadModel->LoadData();
         $data['conditionsJson'] = json_encode($this->condModel->loadConditions());
         $data['LengthJson'] = json_encode($this->condModel2->findAll());
+        $data['conditions2'] = $this->condModel2->findAll();
         $data['conditions'] = $this->condModel->loadConditions();
         $data['okruh'] = $this->okruhModel->FindAll();
         $data['zanr'] = $this->zanrModel->FindAll();
         //depricated 
         if ($this->request->getMethod() === "post") {
-            //vemu data z formulare 
             $values = $this->request->getPost();
-            //cyklem projedeme array hodnot id z formy
             $records = array();
             foreach ($values as $key => $val) {
                 $id = $key;
-                $records[] = $this->booksModel->where('idKniha', $id)->get()->getResult()[0];
+                $records[] = $this->booksModel
+    ->select('kniha.*, okruh.nazev as okruh, zanr.nazev as zanr')
+    ->join('okruh', 'okruh.idOkruh = kniha.Okruh_idOkruh', 'inner')
+    ->join('zanr', 'zanr.idZanr = kniha.Zanr_idZanr', 'inner')
+    ->where('kniha.idKniha', $id)
+    ->get()
+    ->getResult()[0];
                // $records[] = $this->mod->getSelBooks($id);
             }
        
