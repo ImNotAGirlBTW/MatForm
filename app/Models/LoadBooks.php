@@ -32,8 +32,6 @@ class LoadBooks extends Model
 
     public function updateBook($bookId, $data)
     {
-        echo "Updating book with ID: $bookId<br>";
-    var_dump($data);
         $this->set($data);
         $this->where('idKniha', $bookId);
         $this->update();

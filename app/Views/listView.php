@@ -71,7 +71,7 @@
         </div>
     </div>
 </div>
-<br>
+
 <div class="podpis">
 <p>.................................</p>
 <p>Datum a podpis žáka</p>
