@@ -19,7 +19,7 @@
 
         <label for="zanr">Zanr:</label>
         <select name="zanr" id="zanr" class="form-control" required>
-            <option value="" selected disabled>Select Zanr</option>
+            <option value="" selected disabled>Vyberte žánr</option>
             <?php foreach ($zanrOptions as $zanrOption): ?>
                 <option value="<?= $zanrOption['idZanr'] ?>"><?= $zanrOption['nazev'] ?></option>
             <?php endforeach; ?>
@@ -29,7 +29,7 @@
 
         <label for="okruh">Okruh:</label>
         <select name="okruh" id="okruh" class="form-control" required>
-            <option value="" selected disabled>Select Okruh</option>
+            <option value="" selected disabled>Vyberte okruh</option>
             <?php foreach ($okruhOptions as $okruhOption): ?>
                 <option value="<?= $okruhOption['idOkruh'] ?>"><?= $okruhOption['nazev'] ?></option>
             <?php endforeach; ?>

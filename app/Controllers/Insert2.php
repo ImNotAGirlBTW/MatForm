@@ -16,7 +16,7 @@ class Insert2 extends BaseController {
         $existingBook = $bookModel->where('nazev', $bookName)->first();
 
         if ($existingBook) {
-            echo "Error: This book already exists in the database.";
+            echo "Už to existuje blbečku!";
         } else {
             $bookData = [
                 'nazev' => $bookName,

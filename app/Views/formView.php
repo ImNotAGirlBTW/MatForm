@@ -5,15 +5,50 @@
     .table-container {
         display: flex;
         justify-content: space-between;
+       position: fixed;
+        top: 0;
+        width: 100%;
+     
     }
 
     .table {
         border: 1px solid #ddd;
         padding: 8px;
+        background-color: white;
     }
+
+    .container{
+        margin-top: 8%;
+        display: flex;
+        flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+        justify-content: center;
+    }
+
+    .okruhSector {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        border: 1px solid #000;
+    }
+
+    .category-container {
+        flex-basis: 48%;
+        margin: 1%;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #f8f9fa; /* Light gray background color */
+        padding: 15px; /* Add padding for better appearance */
+    }
+
+
+
+
 </style>
 <div class="table-container">
 <?php
+
+use PhpParser\Node\Expr\AssignOp\Div;
+
 foreach ($conditions as $cond) {
     echo '<table class="table">';
     echo '<tr>'; 
@@ -51,33 +86,40 @@ foreach ($conditions2 as $cond){
 }
 ?>
 </div>
+<form method="POST" action="<?= base_url(''); ?>"  onsubmit="return validateForm()" id="myForm">
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <form method="POST" action="<?= base_url(''); ?>"  onsubmit="return validateForm()"> 
-                <?php 
-                $currentCategory = null;
-                    foreach($books as $book):
-                        if ($book->okruh != $currentCategory) {
-                            echo '<h2>' . $book->okruh . '</h2>';
-                            $currentCategory = $book->okruh; 
-                        }
-                ?>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input"  value="<?=$book->okruh . "-" . $book->zanr?>" id="<?= $book->idKniha ?>" name="<?= $book->idKniha;?>"onclick="handleOnClick()">
-                        <label class="form-check-label" for="<?= $book->idKniha ?>"><?=$book->autor ." <-- ".$book->kniha ." -->" ?><strong><?= $book->zanr?></strong></label>
+    <?php
+    $currentCategory = null;
+    foreach ($books as $book):
+        if ($book->okruh != $currentCategory) {
+            if ($currentCategory !== null) {
+                echo '</div>'; // Close the previous container
+            }
+            echo '<div class="category-container">'; // Open a new container
+            $currentCategory = $book->okruh;
+            echo '<h2>' . $book->okruh . '</h2>';
+        }
+        ?>
+  <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" value="<?= $book->okruh . "-" . $book->zanr ?>" id="<?= $book->idKniha ?>" name="<?= $book->idKniha; ?>" onclick="handleOnClick()">
+                <label class="form-check-label" for="<?= $book->idKniha ?>">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>
+                                <span style="color:#5A5A5A"><?= $book->autor ?></span>
+                                <span class="mx-2"> <?= " | " . $book->kniha . " | " ?></span>
+                            </strong>
+                        </div>
+                        <span style="color:red"> <?= $book->zanr ?></span>
                     </div>
-                <?php 
-                    endforeach;
-                ?>
-             
-                <button id="butt"  class="btn btn-primary">Vytiskni</button>
-
-               
-            </form>
-        </div>
-    </div>
+                </label>
+            </div>
+    <?php endforeach; ?>
+    <?php echo '</div>'; // Close the last container ?>
+    <button id="butt"  class="btn btn-primary">Vytiskni</button>
+    </form> 
 </div>
+
 
 <script>
 const conditions1 = <?= $conditionsJson ?>;
@@ -104,7 +146,6 @@ function handleOnClick() {
     checkSelectedBooks(selectedValues);
 
 }
-
 
 function checkSelectedBooks(selectedValues) {
     let zanrCounts = {};
@@ -208,16 +249,17 @@ function checkSelectedBooks(selectedValues) {
         metConditions = false;
     }
 
-    console.log("Zanr Counts: ", zanrCounts);
-    console.log("Okruh Counts: ", okruhCounts);
-    console.log("Met Conditions: ", metConditions);
+    console.log("Žánr počet: ", zanrCounts);
+    console.log("Okruh počet: ", okruhCounts);
+    console.log("Podmínka: ", metConditions);
 }
 }
 
 function validateForm() {
-    console.log("Form validation result:", metConditions);
+
+    console.log("Prošlo to:", metConditions);
     if (!metConditions) {
-        alert("Nesplněné podmínky!!");
+        alert("Nesplněné podmínky");
     }
     return metConditions;
 }
