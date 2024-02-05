@@ -5,7 +5,7 @@
     <div class="container form-container">
         <h2>Insert Book</h2>
         <?php echo helper('form'); ?>
-        <?php echo form_open('insert/book'); ?>
+        <?php echo form_open('insert/book', ['id' => 'mainForm']); ?>
 
         <label for="nazev">Book Name:</label>
         <input type="text" name="nazev" id="nazev" class="form-control" required>
@@ -36,10 +36,20 @@
         </select>
 
         <br><br>
-
-        <button type="submit" class="btn btn-primary btn-block">Upload</button>
-
         <?php echo form_close(); ?>
     </div>
+    <button type="submit" class="btn btn-primary btn-block">Upload</button>
+        <button type="button" class="btn btn-success btn-block" onclick="addNewForm()">+</button>
 </div>
+
+<script>
+    function addNewForm() {
+        const mainForm = document.getElementById('mainForm');
+        const clonedForm = mainForm.cloneNode(true);
+        const cloneDiv = document.querySelector('.form-container').cloneNode(true)
+        clonedForm.reset();
+      document.querySelector('.form-container').appendChild(clonedForm);
+    }
+</script>
+
 <?= $this->endSection(); ?>
