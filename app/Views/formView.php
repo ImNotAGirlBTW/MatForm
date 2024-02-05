@@ -2,6 +2,13 @@
 
 <?= $this->section('content')?>
 <style>
+    h2{
+        text-align: center;
+    }
+     body {
+            background-color: #f8f9fa; 
+        }
+        
     .table-container {
         display: flex;
         justify-content: space-between;
@@ -34,9 +41,9 @@
     .category-container {
         flex-basis: 48%;
         margin: 1%;
-        border: 1px solid #ddd;
         border-radius: 10px;
-        background-color: #f8f9fa; /* Light gray background color */
+        background-color: #fff;
+        border: 2px solid #ddd; /* Light gray background color */
         padding: 15px; /* Add padding for better appearance */
     }
 
@@ -108,9 +115,9 @@ foreach ($conditions2 as $cond){
                             <strong>
                                 <span style="color:#5A5A5A"><?= $book->autor ?></span>
                                 <span class="mx-2"> <?= " | " . $book->kniha . " | " ?></span>
-                            </strong>
                         </div>
                         <span style="color:red"> <?= $book->zanr ?></span>
+                        </strong>
                     </div>
                 </label>
             </div>

@@ -16,6 +16,18 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            
+        }
+        .i{ 
+            margin:5%;
+            width: 100%;
+            background-color: red;
+        }
+
+        h2{
+            text-align: center;
         }
 
         .form-container {
