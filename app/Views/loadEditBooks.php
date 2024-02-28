@@ -25,7 +25,9 @@
                         <td><?= $book->zanr ?></td>
                         <td><?= $book->okruh ?></td>
                         <td>
-                                <a href="<?= base_url('edit/book/' . $book->idKniha) ?>">Edit</a>
+                        <button class="btn btn-primary" onclick="window.location.href='<?= base_url('edit/book/' . $book->idKniha) ?>'">Upravit</button>
+
+                        <button class="btn btn-danger" onclick="window.location.href='<?= base_url('delete/' . $book->idKniha) ?>'">Smazat</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>

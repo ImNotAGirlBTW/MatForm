@@ -80,6 +80,7 @@ $this->dompdf = new Dompdf($options);
     ->join('okruh', 'okruh.idOkruh = kniha.Okruh_idOkruh', 'inner')
     ->join('zanr', 'zanr.idZanr = kniha.Zanr_idZanr', 'inner')
     ->where('kniha.idKniha', $id)
+    ->orderBy('okruh,kniha.nazev')
     ->get()
     ->getResult()[0];
                // $records[] = $this->mod->getSelBooks($id);

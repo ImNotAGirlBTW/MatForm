@@ -2,6 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="wrap">
+
     <div class="container form-container">
         <h2>Insert Book</h2>
         <?php echo helper('form'); ?>
