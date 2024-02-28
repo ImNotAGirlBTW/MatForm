@@ -1,14 +1,14 @@
 <?= $this->extend('layouts/insertLay'); ?>
 
 <?= $this->section('content') ?>
+
 <div class="wrap">
-
     <div class="container form-container">
-        <h2>Insert Book</h2>
+        <h2>Vložte dílo</h2>
         <?php echo helper('form'); ?>
-        <?php echo form_open('insert/book', ['id' => 'mainForm']); ?>
+        <?php echo form_open('insert/book', ['id' => 'mainForm1']); ?>
 
-        <label for="nazev">Book Name:</label>
+        <label for="nazev">Název díla:</label>
         <input type="text" name="nazev" id="nazev" class="form-control" required>
 
         <br><br>
@@ -18,7 +18,7 @@
 
         <br><br>
 
-        <label for="zanr">Zanr:</label>
+        <label for="zanr">Žánr:</label>
         <select name="zanr" id="zanr" class="form-control" required>
             <option value="" selected disabled>Vyberte žánr</option>
             <?php foreach ($zanrOptions as $zanrOption): ?>
@@ -37,20 +37,34 @@
         </select>
 
         <br><br>
+        <hr>
         <?php echo form_close(); ?>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Upload</button>
-        <button type="button" class="btn btn-success btn-block" onclick="addNewForm()">+</button>
 </div>
-
+<div class="mt-1 d-flex justify-content-center align-items-center">
+<button type="button" class="btn btn-primary btn-block" onclick="submitAllForms()">Odeslat</button>
+<button type="button" class="btn btn-success btn-block" onclick="addNewForm()">+</button>
+</div>
 <script>
-    function addNewForm() {
-        const mainForm = document.getElementById('mainForm');
-        const clonedForm = mainForm.cloneNode(true);
-        const cloneDiv = document.querySelector('.form-container').cloneNode(true)
-        clonedForm.reset();
-      document.querySelector('.form-container').appendChild(clonedForm);
-    }
+        let formCount = 1; 
+
+function addNewForm() {
+    const mainForm = document.getElementById('mainForm1');
+    const clonedForm = mainForm.cloneNode(true);
+    formCount++;
+    
+    clonedForm.id = 'mainForm' + formCount;
+
+    clonedForm.reset();
+
+    document.querySelector('.container').appendChild(clonedForm);
+}
+
+function submitAllForms() {
+    const forms = document.querySelectorAll('form[id^="mainForm"]');
+    forms.forEach(form => form.submit());
+}
 </script>
+
 
 <?= $this->endSection(); ?>
