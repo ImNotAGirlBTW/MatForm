@@ -15,7 +15,7 @@ class LoadBooks extends Model
         $this->join('okruh', 'kniha.Okruh_idOkruh=okruh.idOkruh');
         $this->join('zanr', 'kniha.Zanr_idZanr=zanr.idZanr');
         $this->select('*, okruh.nazev as okruh, okruh.pocet as oPocet, zanr.nazev as zanr, zanr.pocet as zPocet, kniha.nazev as kniha');
-        $this->orderBy('idOkruh');
+        $this->orderBy('idOkruh,kniha.nazev');
         $data = $this->get()->getResult();
         return $data;
     }
@@ -36,4 +36,6 @@ class LoadBooks extends Model
         $this->where('idKniha', $bookId);
         $this->update();
     }
+
+
 }

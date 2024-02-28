@@ -64,8 +64,19 @@
                 <th><?=$count ++?></th>
                 <th><?= $one->nazev . " : " . $one->autor; ?></th>
                 <th><?= $one->okruh?></th>
-                <th></th>
-                <th></th>
+                <?php
+                if($one->zanr == "Poe"){
+                echo "<th>*</th>";
+                echo "<th></th>";
+                }elseif($one->zanr == "Dra"){
+                    echo "<th></th>";
+                    echo "<th>*</th>";
+                }else{
+                    echo "<th></th>";
+                    echo "<th></th>"; 
+                }
+            
+                ?>
             <?php endforeach; ?>
     </table>
         </div>
