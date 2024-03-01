@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vložení děl</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link href="<?= base_url('/vendor/twbs/bootstrap/dist/css/bootstrap.min.css' )?>" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa; 
@@ -29,6 +29,27 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+        <a class="nav-link" href="<?= base_url("insertView")?>">Excel</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<?= base_url("insert")?>">Vložení</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<?= base_url("edit/books")?>">Knihy</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<?= base_url("editCond")?>">Podmínky</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <?php $this->renderSection('content'); ?>
 
 </body>

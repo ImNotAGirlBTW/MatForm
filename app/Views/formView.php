@@ -61,12 +61,16 @@ foreach ($conditions as $cond) {
     echo '<td>';
     
     if (isset($cond['okruh'])) {
-        echo $cond['popis'] . '<div id="' . $cond['okruh'] . '_count">' . $cond['oPocet'] . '</div>' . " " . $cond['okruh'];
+        echo '<span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $cond['popis'] . '">';
+        echo "Potřeba vybrat" . '<div id="' . $cond['okruh'] . '_count">' . $cond['oPocet'] . '</div>' . " " . $cond['okruh'];
+        echo '</span>';
     }
 
    
     if (isset($cond['zanr'])) {
+        echo '<span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $cond['popis'] . '">';
         echo $cond['popis'] . '<div id="' . $cond['zanr'] . '_count">' . $cond['zPocet'] . '</div>' . " " . $cond['zanr'];
+        echo '</span>';
     }
 
     echo '</td>';
@@ -140,6 +144,15 @@ let unMetO = {};
 let totalCount = 0;
 const unmetOkruhConditions = [];
 var cond = [];
+
+
+document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+
 
 for (const condition of conditions1) {
         unMetZ[condition.zanr] = condition.zanr;
