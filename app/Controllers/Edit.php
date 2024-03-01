@@ -44,6 +44,48 @@ public function saveBook() {
 
     return redirect()->to('/edit/books'); 
 }
+public function loadChar(){
+    $data['zanrOptions'] = $this->zanrModel->get()->getResult();
+    $data['okruhOptions'] = $this->okruhModel->get()->getResult();
+    echo view('editCondview',$data);
+}
+
+public function EditChar($id){
+    $data['zanrOptions'] = $this->zanrModel->where('idZanr', $id)->get()->getResult();
+    echo view('editCond',$data);
+}
+
+public function saveChar(){
+
+    $ZanrId = $this->request->getPost('zanrID');
+    $newZanData = [
+        'nazev' => $this->request->getPost('zanr'),
+        'pocet' => $this->request->getPost('zPocet'),
+        'idZanr' => $this->request->getPost('zanrID'),
+        'popis' => $this->request->getPost('zPopis'),
+    ];
+    $this->zanrModel->updateBook($ZanrId, $newZanData); 
+    return redirect()->to('editCond'); 
+}
+
+
+public function EditOkruh($id){
+    $data['okruhOptions'] = $this->okruhModel->where('idOkruh', $id)->get()->getResult();
+    echo view('editOkruh',$data);
+}
+
+public function saveOkruh(){
+
+    $OkruhID = $this->request->getPost('okruhID');
+    $newOkrData = [
+        'nazev' => $this->request->getPost('okruh'),
+        'pocet' => $this->request->getPost('oPocet'),
+        'idOkruh' => $this->request->getPost('okruhID'),
+        'popis' => $this->request->getPost('oPopis'),
+    ];
+  $this->okruhModel->updateBook($OkruhID, $newOkrData); 
+    return redirect()->to('editCond'); 
+}
 
 
 }

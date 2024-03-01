@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link href="<?= base_url('/vendor/twbs/bootstrap/dist/css/bootstrap.min.css' )?>" rel="stylesheet">
+   <script src="<?= base_url('vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
@@ -28,13 +29,11 @@ window.onscroll = function() {
   const currentScrollPos = window.pageYOffset;
 
   if (currentScrollPos === 0) {
-    // User is at the top of the screen
     navbar.style.display = 'flex';
-    tableContainer.style.marginTop = navbar.offsetHeight + 'px'; // Push down the table-container
+    tableContainer.style.marginTop = navbar.offsetHeight + 'px'; 
   } else {
-    // User is not at the top of the screen
     navbar.style.display = 'none';
-    tableContainer.style.marginTop = '0'; // Reset the margin
+    tableContainer.style.marginTop = '0'; 
   }
 
   prevScrollPos = currentScrollPos;
