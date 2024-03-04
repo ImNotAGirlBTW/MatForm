@@ -21,7 +21,7 @@
                         <td><?= $one->pocet ?></td>
                         <td>
                         <button class="btn btn-primary" onclick="window.location.href='<?= base_url('editChar' . $one->idZanr) ?>'">Upravit</button>
-                        <button class="btn btn-danger" onclick="window.location.href='<?= base_url('delete/Cond/' . $one->idZanr) ?>'">Smazat</button>
+                        <button class="btn btn-danger" onclick="window.location.href='<?= base_url('delete/Cond1/' . $one->idZanr) ?>'">Smazat</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -47,7 +47,7 @@
                         <td><?= $one->pocet ?></td>
                         <td>
                         <button class="btn btn-primary" onclick="window.location.href='<?= base_url('editOkruh' . $one->idOkruh) ?>'">Upravit</button>
-                        <button class="btn btn-danger" onclick="window.location.href='<?= base_url('delete/Cond/' . $one->idOkruh) ?>'">Smazat</button>
+                        <button class="btn btn-danger" onclick="window.location.href='<?= base_url('delete/Cond2/' . $one->idOkruh) ?>'">Smazat</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
