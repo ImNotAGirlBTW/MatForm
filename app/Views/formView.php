@@ -30,12 +30,7 @@
         justify-content: center;
     }
 
-    .okruhSector {
-        width: 100px;
-        height: 100px;
-        margin: 10px;
-        border: 1px solid #000;
-    }
+
 
     .category-container {
         flex-basis: 48%;
@@ -45,9 +40,6 @@
         border: 2px solid #ddd; 
         padding: 15px;
     }
-
-
-
 
 </style>
 <div class="table-container">
