@@ -5,7 +5,7 @@
 <div class="wrap">
     <div class="container form-container">
         <?php echo helper('form'); ?>
-        <?php echo form_open('insert/cond', ['id' => 'mainForm1']); ?>
+        <?php echo form_open('insert/cond2', ['id' => 'mainForm1']); ?>
         <label for="nazev">Zkratka:</label>
         <input type="text" name="nazev" id="nazev" class="form-control" required>
 

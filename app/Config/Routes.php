@@ -30,3 +30,6 @@ $routes->post('editOkruh/save','Edit::saveOkruh');
 
 $routes->get('insertCond','Insert::showCondForm');
 $routes->post('insert/cond', 'Insert::addCond');
+
+$routes->get('insertCond2','Insert::showCondForm2');
+$routes->post('insert/cond2', 'Insert::addCond2');
