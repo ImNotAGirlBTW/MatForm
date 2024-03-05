@@ -20,24 +20,6 @@
    
     
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script>
-let prevScrollPos = window.pageYOffset;
-const navbar = document.querySelector('.navbar');
-const tableContainer = document.querySelector('.table-container');
-
-window.onscroll = function() {
-  const currentScrollPos = window.pageYOffset;
-
-  if (currentScrollPos === 0) {
-    navbar.style.display = 'flex';
-    tableContainer.style.marginTop = navbar.offsetHeight + 'px'; 
-  } else {
-    navbar.style.display = 'none';
-    tableContainer.style.marginTop = '0'; 
-  }
-
-  prevScrollPos = currentScrollPos;
-};
-</script>
+<script src="<?= base_url('assets/scroll.js')?>"></script>
 </body>
 </html>

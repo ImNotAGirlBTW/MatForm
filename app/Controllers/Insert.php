@@ -78,23 +78,25 @@ class Insert extends BaseController {
     public function showCondForm()
     {
         $data['zanrOptions'] = $this->zanrModel->findAll();
-        $data['okruhOptions'] = $this->okruhModel->findAll();
         return view('condForm',$data);
+    }
+
+    public function showCondForm2()
+    {
+        $data['okruhOptions'] = $this->okruhModel->findAll();
+        return view('condForm2',$data);
     }
 
     public function addCond()
     {
-        $cond = $this->request->getPost('podm');
         $nazev = $this->request->getPost('nazev');
         $popis = $this->request->getPost('popis');
         $pocet = $this->request->getPost('pocet');
 
-    if($cond == 0){
         $existingRecord = $this->zanrModel->where('nazev', $nazev)->first();
 
         if ($existingRecord) {
             echo "Už to existuje blbečku!";
-        } else {
             $zanrData = [
                 'nazev' => $nazev,
                 'popis' => $popis,
@@ -105,7 +107,14 @@ class Insert extends BaseController {
 
             return redirect()->to('insertCond');
         }
-    }else{
+    }
+
+    public function addCond2()
+    {
+
+        $nazev = $this->request->getPost('nazev');
+        $popis = $this->request->getPost('popis');
+        $pocet = $this->request->getPost('pocet');
 
         $existingRecord = $this->okruhModel->where('nazev', $nazev)->first();
 
@@ -120,11 +129,12 @@ class Insert extends BaseController {
 
             $this->okruhModel->insert($okruhData);
 
-            return redirect()->to('insertCond');
+            return redirect()->to('insertCond2');
         }
 
+
     }
     }
 
-    }
+    
 

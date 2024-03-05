@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vložení děl</title>
     <link href="<?= base_url('/vendor/twbs/bootstrap/dist/css/bootstrap.min.css' )?>" rel="stylesheet">
+    <script src="<?= base_url('vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
+
     <style>
         body {
             background-color: #f8f9fa; 
@@ -34,16 +36,21 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-        <a class="nav-link" href="<?= base_url("insertView")?>">Excel</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="<?= base_url("insert")?>">Vložení</a>
-        </li>
-        <li class="nav-item">
         <a class="nav-link" href="<?= base_url("edit/books")?>">Knihy</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="<?= base_url("editCond")?>">Podmínky</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Vložení
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<?= base_url("insert")?>">Dílo</a></li>
+            <li><a class="dropdown-item" href="<?= base_url("insertView")?>">Excel</a></li>
+            <li><a class="dropdown-item" href="<?= base_url("insertCond")?>">Žánr</a></li>
+            <li><a class="dropdown-item" href="<?= base_url("insertCond2")?>">Oruh</a></li>
+          </ul>
         </li>
       </ul>
     </div>
