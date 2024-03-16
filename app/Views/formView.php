@@ -1,69 +1,6 @@
 <?= $this->extend('layouts/master');?>
 
 <?= $this->section('content')?>
-<style>
-  h2 {
-        text-align: center;
-    }
-
-    body {
-        background-color: #f8f9fa;
-    }
-
- 
-    .table-container {
-        display: flex;
-        justify-content: space-between;
-        position: fixed;
-        top: 0;
-        width: 100%;
-    }
-
-    .table {
-        border: 1px solid #ddd;
-        padding: 8px;
-        background-color: white;
-    }
-
-    @media (max-width: 768px) {
-        .table-container {
-            flex-direction: column; 
-            align-items: center;
-            top: 0;
-            position:relative;
-            justify-content: center;
-        }
-
-        .table {
-            width: 100%; 
-            margin-bottom: 5px; 
-        }
-    }
-
-    .container {
-        margin-top: 8%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .category-container {
-        flex-basis: 100%; /* Full width on small screens */
-        margin: 1%;
-        border-radius: 10px;
-        background-color: #fff;
-        border: 2px solid #ddd;
-        padding: 15px;
-    }
-
-    @media (min-width: 576px) {
-        .category-container {
-            flex-basis: 48%; /* 2 columns on larger screens */
-        }
-    }
-
-
-</style>
 <div class="table-container">
 <?php
 
@@ -144,11 +81,19 @@ foreach ($conditions2 as $cond){
 <button id="butt"  class="btn btn-primary">Vytiskni</button>
 </div>
 </form> 
-
 <script>
 const conditions1 = <?= $conditionsJson ?>;
 const conditions2 = <?= $LengthJson?>;
-</script>
-<script src="<?= base_url('assets/checking.js')?>"></script>
 
+
+document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+</script>
+
+<script src="<?= base_url('assets/checking.js')?>"></script>
+<script src="<?= base_url('vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js')?>"></script>
 <?= $this->endSection();?>  

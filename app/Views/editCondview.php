@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/master'); ?>
+<?= $this->extend('layouts/insertLay'); ?>
 
 <?= $this->section('content') ?>
 <div class="wrap">

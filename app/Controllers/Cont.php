@@ -8,6 +8,7 @@ use App\Models\Conditions;
 use App\Models\Conditions2;
 use  App\Models\LoadBooks;
 use App\Models\Okruh;
+use App\Models\User;
 use  App\Models\Zanr;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -22,6 +23,9 @@ class Cont extends BaseController
     private $LoadModel;
     private $okruhModel;
     private $zanrModel;
+
+    private $user;
+
     function __construct()
     {
        // $this->dompdf = new \Dompdf\Dompdf(array('enable_remote' => true));
@@ -62,6 +66,8 @@ $this->dompdf = new Dompdf($options);
         // $data['books'] = $this->booksModel->findAll();
        // $data['books'] = $this->mod->LoadData();
 
+        $data['user'] = session()->get('user');
+
         $data['books'] = $this->LoadModel->LoadData();
         $data['conditionsJson'] = json_encode($this->condModel->loadConditions());
         $data['LengthJson'] = json_encode($this->condModel2->findAll());
@@ -76,13 +82,13 @@ $this->dompdf = new Dompdf($options);
             foreach ($values as $key => $val) {
                 $id = $key;
                 $records[] = $this->booksModel
-    ->select('kniha.*, okruh.nazev as okruh, zanr.nazev as zanr')
-    ->join('okruh', 'okruh.idOkruh = kniha.Okruh_idOkruh', 'inner')
-    ->join('zanr', 'zanr.idZanr = kniha.Zanr_idZanr', 'inner')
-    ->where('kniha.idKniha', $id)
-    ->orderBy('okruh,kniha.nazev')
-    ->get()
-    ->getResult()[0];
+                    ->select('kniha.*, okruh.nazev as okruh, zanr.nazev as zanr')
+                    ->join('okruh', 'okruh.idOkruh = kniha.Okruh_idOkruh', 'inner')
+                    ->join('zanr', 'zanr.idZanr = kniha.Zanr_idZanr', 'inner')
+                    ->where('kniha.idKniha', $id)
+                    ->orderBy('okruh,kniha.nazev')
+                    ->get()
+                    ->getResult()[0];
                // $records[] = $this->mod->getSelBooks($id);
             }
        

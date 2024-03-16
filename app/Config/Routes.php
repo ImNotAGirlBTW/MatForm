@@ -33,3 +33,10 @@ $routes->post('insert/cond', 'Insert::addCond');
 
 $routes->get('insertCond2','Insert::showCondForm2');
 $routes->post('insert/cond2', 'Insert::addCond2');
+
+//$routes->get('login','Login::showLog');
+
+
+$routes->get('login', 'AuthLog::login');
+$routes->get('callback', 'AuthLog::callback');
+$routes->get('logout', 'AuthLog::logout');

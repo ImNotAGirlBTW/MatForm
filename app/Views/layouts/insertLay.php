@@ -35,8 +35,11 @@
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url("/")?>">Formulář</a>
+        </li>
         <li class="nav-item">
-        <a class="nav-link" href="<?= base_url("edit/books")?>">Knihy</a>
+        <a class="nav-link" href="<?= base_url("edit/books")?>">Díla</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="<?= base_url("editCond")?>">Podmínky</a>

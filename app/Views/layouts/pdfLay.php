@@ -31,6 +31,7 @@
 
     .table{
         border-collapse: collapse;
+        width: 700px;
     }
 
     .table, td,tr,th{

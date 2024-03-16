@@ -12,12 +12,6 @@ const unmetOkruhConditions = [];
 var cond = [];
 
 
-document.addEventListener('DOMContentLoaded', function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-        });
 
 
 for (const condition of conditions1) {
@@ -51,7 +45,6 @@ function checkSelectedBooks(selectedValues) {
  
 
     for (const condition of conditions1) {
-      //  unMetZ[condition.zanr] = condition.zanr;
 
         const okruh = condition.okruh || '';
         const zanr = condition.zanr || '';
@@ -83,9 +76,11 @@ function checkSelectedBooks(selectedValues) {
             if (oPocet - okruhCount <= 0) {
                 document.getElementById(`${condition.okruh}_count`).style.backgroundColor = '#0FFF50';
                 document.getElementById(`${condition.okruh}_count`).textContent = "SPLNĚNO";
+                delete unMetO[condition.okruh];
             } else {
                 document.getElementById(`${condition.okruh}_count`).textContent = `${oPocet - okruhCount}`;
                 document.getElementById(`${condition.okruh}_count`).style.backgroundColor = 'white';
+                unMetO[condition.okruh] = condition.okruh;
             }
         }
 
@@ -96,9 +91,11 @@ function checkSelectedBooks(selectedValues) {
             if (zPocet - zanrCount <= 0) {
                 document.getElementById(`${condition.zanr}_count`).style.backgroundColor = '#0FFF50';
                 document.getElementById(`${condition.zanr}_count`).textContent = "SPLNĚNO";
+
             } else {
                 document.getElementById(`${condition.zanr}_count`).textContent = `${zPocet - zanrCount}`;
                 document.getElementById(`${condition.zanr}_count`).style.backgroundColor = 'white';
+               
             }
 
             //Celkem Odpočet
@@ -107,7 +104,6 @@ function checkSelectedBooks(selectedValues) {
                 document.getElementById(`total_count`).textContent = "SPLNĚNO";
             } else {
                 document.getElementById(`total_count`).textContent = `${condPocet - totalCount}`;
-                console.log("Celk :" + condPocet);
                 document.getElementById(`total_count`).style.backgroundColor = 'white';
             }
 
@@ -116,10 +112,14 @@ function checkSelectedBooks(selectedValues) {
                     zanrCon[condition.zanr] = 1;
                     delete unMetZ[condition.zanr];
                     console.log("zanr : " +zanrCon[condition.zanr]);
+                }else{
+                    unMetZ[condition.zanr] = condition.zanr;
                 }
 
                 if(okruhCounts[condition.okruh] >= parseInt(condition.oPocet,10)){
                     delete unMetO[condition.okruh];
+                }else{
+                    unMetO[condition.okruh] = condition.okruh;
                 }
             }
         }
@@ -179,7 +179,7 @@ function checkSelectedBooks(selectedValues) {
     console.log("zanr : " +zanrCon);
     console.log("okruh : " + okruhCon);
     console.log(zanrConditionsMet);
-  
+    console.log("fdsafadsfadsfdsa"+unMetZ);
 }
 
 
