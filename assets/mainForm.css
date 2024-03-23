@@ -2,17 +2,24 @@ h2 {
     text-align: center;
 }
 
-body {
-    background-color: #f8f9fa;
-}
-
-
 .table-container {
     display: flex;
     justify-content: space-between;
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+.config {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8%;
+    width: 100%; 
+}
+
+.config form {
+    margin-right: 10px; 
 }
 
 .table {
@@ -36,8 +43,10 @@ body {
     }
 }
 
+
+
 .container {
-    margin-top: 8%;
+    margin-top: 7%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -57,3 +66,4 @@ body {
         flex-basis: 48%; 
     }
 }
+

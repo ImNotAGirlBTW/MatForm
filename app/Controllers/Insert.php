@@ -39,21 +39,21 @@ class Insert extends BaseController {
             $sheet = $spreadsheet->getActiveSheet();
 
            
-            $allData = $sheet->rangeToArray('D16:' . $sheet->getHighestColumn() . $sheet->getHighestRow(), null, true, true, true);
+            $allData = $sheet->rangeToArray('A1:' . $sheet->getHighestColumn() . $sheet->getHighestRow(), null, true, true, true);
     
         
             foreach ($allData as $rowData) {
                 
-                if (empty($rowData['D']) || stripos(implode('', $rowData), 'Autor') !== false) {
+                if (empty($rowData['A']) || stripos(implode('', $rowData), 'Autor') !== false) {
                     continue;
                 }
     
                
-                $kniha = $rowData['E'];
-                $autor = $rowData['D'];
-                $zanrName = $rowData['F'];
-                $okruhName = $rowData['G'];
-    
+                $kniha = $rowData['A'];
+                $autor = $rowData['B'];
+                $zanrName = $rowData['C'];
+                $okruhName = $rowData['D'];
+
                 $zanrRow = $zanrModel->where('nazev', $zanrName)->first();
             $zanrId = $zanrRow ? $zanrRow['idZanr'] : null;
 
@@ -68,10 +68,12 @@ class Insert extends BaseController {
                 'Okruh_idOkruh' => $okruhId,
             ]);
             }
+
+            return redirect()->to('edit/books');
         } else {
             
             $error = $this->request->getFile('excel_file')->getError();
-            echo "File upload failed: " . $error;
+            echo "Nahrání souboru se nepovedlo: " . $error;
         }
     }
     
@@ -96,7 +98,7 @@ class Insert extends BaseController {
         $existingRecord = $this->zanrModel->where('nazev', $nazev)->first();
 
         if ($existingRecord) {
-            echo "Už to existuje blbečku!";
+            echo "Kniha již existuhe";
             $zanrData = [
                 'nazev' => $nazev,
                 'popis' => $popis,

@@ -5,21 +5,24 @@ use App\Controllers\BaseController;
 use App\Models\LoadBooks;
 use App\Models\Zanr;
 use App\Models\Okruh;
-
+use App\Models\Conditions2;
+use App\Models\Year;
 class Edit extends BaseController {
  private $loadBooksModel;
  private $zanrModel;
  private $okruhModel;
+ private $conditionModel;
+ private $yearMod;
     function __construct(){
         $this->loadBooksModel = new LoadBooks();
         $this->zanrModel = new Zanr();
         $this->okruhModel = new Okruh();
-
+        $this->conditionModel = new Conditions2();
+        $this->yearMod = new Year();
     }
   
 public function editBooks() {
     $data['books'] =$this->loadBooksModel->LoadData2(); 
-
     echo view('loadEditBooks', $data);
 }
 
@@ -47,6 +50,7 @@ public function saveBook() {
 public function loadChar(){
     $data['zanrOptions'] = $this->zanrModel->get()->getResult();
     $data['okruhOptions'] = $this->okruhModel->get()->getResult();
+    $data['cond'] = $this->conditionModel->get()->getResult()[0];
     echo view('editCondview',$data);
 }
 
@@ -87,5 +91,23 @@ public function saveOkruh(){
     return redirect()->to('editCond'); 
 }
 
+public function saveCondition(){
+    $condId = $this->request->getPost('idPodm');
+    $newData = [
+        'pocet' => $this->request->getPost('cond'),
+        'popis' => $this->request->getPost('popis'),
+    ];
+  $this->conditionModel->set($newData)->where('idPodminky',$condId)->update();
+  return redirect()->to('editCond'); 
+}
 
+public function editYear(){
+    $yearId = $this->request->getPost('yearId');
+    $newData = [
+        'skolni_rok' =>  $this->request->getPost('year'),
+    ];
+$this->yearMod->set($newData)->where('id',$yearId)->update();
+
+return redirect()->to('/');
+}
 }

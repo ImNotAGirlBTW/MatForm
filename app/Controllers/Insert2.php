@@ -16,7 +16,7 @@ class Insert2 extends BaseController {
         $existingBook = $bookModel->where('nazev', $bookName)->first();
 
         if ($existingBook) {
-            echo "Už to existuje blbečku!";
+            echo "Dílo již existuje v záznamu";
         } else {
             $bookData = [
                 'nazev' => $bookName,
@@ -30,4 +30,8 @@ class Insert2 extends BaseController {
             return redirect()->to('insert');
         }
     }
+
+    
+        
 }
+

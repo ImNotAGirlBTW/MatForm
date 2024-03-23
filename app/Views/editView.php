@@ -13,9 +13,9 @@
         <input type="text" name="nazev" id="nazev" class="form-control" value="<?= $book->nazev ?>" required>
 
         <br><br>
-        <label for="zanr">Zanr:</label>
+        <label for="zanr">Druh:</label>
         <select name="zanr" id="zanr" class="form-control" required>
-            <option value="" selected disabled>Vyberte žánr</option>
+            <option value="" selected disabled>Vyberte lit. druh</option>
             <?php foreach ($zanrOptions as $zanrOption): ?>
                 <option value="<?= $zanrOption->idZanr ?>" <?= ($book->Zanr_idZanr == $zanrOption->idZanr) ? 'selected' : '' ?>>
                     <?= $zanrOption->nazev ?>

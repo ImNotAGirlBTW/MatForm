@@ -1,10 +1,8 @@
 <?= $this->extend('layouts/insertLay'); ?>
 
 <?= $this->section('content') ?>
-
 <div class="wrap">
     <div class="container form-container">
-        <h2>Vložte dílo</h2>
         <?php echo helper('form'); ?>
         <?php echo form_open('insert/book', ['id' => 'mainForm1']); ?>
 
@@ -18,9 +16,9 @@
 
         <br><br>
 
-        <label for="zanr">Žánr:</label>
+        <label for="zanr">Druh:</label>
         <select name="zanr" id="zanr" class="form-control" required>
-            <option value="" selected disabled>Vyberte žánr</option>
+            <option value="" selected disabled>Vyberte lit. druh</option>
             <?php foreach ($zanrOptions as $zanrOption): ?>
                 <option value="<?= $zanrOption['idZanr'] ?>"><?= $zanrOption['nazev'] ?></option>
             <?php endforeach; ?>
