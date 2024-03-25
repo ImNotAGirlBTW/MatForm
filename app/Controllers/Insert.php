@@ -49,11 +49,11 @@ class Insert extends BaseController {
                 }
     
                
-                $kniha = $rowData['E'];
-                $autor = $rowData['D'];
+                $kniha = $rowData['D'];
+                $autor = $rowData['E'];
                 $zanrName = $rowData['F'];
                 $okruhName = $rowData['G'];
-    
+
                 $zanrRow = $zanrModel->where('nazev', $zanrName)->first();
             $zanrId = $zanrRow ? $zanrRow['idZanr'] : null;
 
@@ -68,10 +68,12 @@ class Insert extends BaseController {
                 'Okruh_idOkruh' => $okruhId,
             ]);
             }
+
+            return redirect()->to('edit/books');
         } else {
             
             $error = $this->request->getFile('excel_file')->getError();
-            echo "File upload failed: " . $error;
+            echo "Nahrání souboru se nepovedlo: " . $error;
         }
     }
     
@@ -96,16 +98,17 @@ class Insert extends BaseController {
         $existingRecord = $this->zanrModel->where('nazev', $nazev)->first();
 
         if ($existingRecord) {
-            echo "Už to existuje blbečku!";
+        echo "Záznam již existuje";
+        }else{
             $zanrData = [
                 'nazev' => $nazev,
                 'popis' => $popis,
                 'pocet' => $pocet,
             ];
-
-            $this->zanrModel->insert($zanrData);
-
-            return redirect()->to('insertCond');
+            var_dump($zanrData);
+            die;
+           // $this->zanrModel->insert($zanrData);
+          //  return redirect()->to('insertCond');
         }
     }
 
@@ -119,7 +122,7 @@ class Insert extends BaseController {
         $existingRecord = $this->okruhModel->where('nazev', $nazev)->first();
 
         if ($existingRecord) {
-            echo "Už to existuje blbečku!";
+            echo "Záznam už existuje";
         } else {
             $okruhData = [
                 'nazev' => $nazev,

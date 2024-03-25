@@ -13,7 +13,10 @@
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
         "dompdf/dompdf": "^2.0",
+        "league/oauth2-client": "^2.7",
+        "microsoft/microsoft-graph": "1.73",
         "phpoffice/phpspreadsheet": "^2.0",
+        "tinymce/tinymce": "^7.0",
         "twbs/bootstrap": "5.2.3"
     },
     "require-dev": {
@@ -34,7 +37,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "scripts": {
         "test": "phpunit"

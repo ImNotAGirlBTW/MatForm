@@ -17,37 +17,38 @@
         <br><br>
 
         <label for="pocet">Počet:</label>
-        <input type="number" name="pocet" id="pocet" class="form-control" required>
+        <input type="number" min="0" name="pocet" id="pocet" class="form-control" required>
 
 
         <br><br>
         <hr>
+        <button type="submit">ff</button>
         <?php echo form_close(); ?>
     </div>
 </div>
 <div class="mt-1 d-flex justify-content-center align-items-center">
-<button type="button" class="btn btn-primary btn-block" onclick="submitAllForms()">Odeslat</button>
-<button type="button" class="btn btn-success btn-block" onclick="addNewForm()">+</button>
+    <button type="button" class="btn btn-primary btn-block" onclick="submitAllForms()">Odeslat</button>
+    <button type="button" class="btn btn-success btn-block" onclick="addNewForm()">+</button>
 </div>
 <script>
-        let formCount = 1; 
+    let formCount = 1;
 
-function addNewForm() {
-    const mainForm = document.getElementById('mainForm1');
-    const clonedForm = mainForm.cloneNode(true);
-    formCount++;
-    
-    clonedForm.id = 'mainForm' + formCount;
+    function addNewForm() {
+        const mainForm = document.getElementById('mainForm1');
+        const clonedForm = mainForm.cloneNode(true);
+        formCount++;
 
-    clonedForm.reset();
+        clonedForm.id = 'mainForm' + formCount;
 
-    document.querySelector('.container').appendChild(clonedForm);
-}
+        clonedForm.reset();
 
-function submitAllForms() {
-    const forms = document.querySelectorAll('form[id^="mainForm"]');
-    forms.forEach(form => form.submit());
-}
+        document.querySelector('.container').appendChild(clonedForm);
+    }
+
+    function submitAllForms() {
+        const forms = document.querySelectorAll('form[id^="mainForm"]');
+        forms.forEach(form => form.submit());
+    }
 </script>
 
 

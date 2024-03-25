@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/insertLay'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 <div class="wrap">
     <div class="container form-container">
         <h2>Edit Book</h2>
@@ -13,10 +13,10 @@
         <input type="text" name="nazev" id="nazev" class="form-control" value="<?= $book->nazev ?>" required>
 
         <br><br>
-        <label for="zanr">Zanr:</label>
+        <label for="zanr">Druh:</label>
         <select name="zanr" id="zanr" class="form-control" required>
-            <option value="" selected disabled>Vyberte žánr</option>
-            <?php foreach ($zanrOptions as $zanrOption): ?>
+            <option value="" selected disabled>Vyberte lit. druh</option>
+            <?php foreach ($zanrOptions as $zanrOption) : ?>
                 <option value="<?= $zanrOption->idZanr ?>" <?= ($book->Zanr_idZanr == $zanrOption->idZanr) ? 'selected' : '' ?>>
                     <?= $zanrOption->nazev ?>
                 </option>
@@ -28,7 +28,7 @@
         <label for="okruh">Okruh:</label>
         <select name="okruh" id="okruh" class="form-control" required>
             <option value="" selected disabled>Vyberte okruh</option>
-            <?php foreach ($okruhOptions as $okruhOption): ?>
+            <?php foreach ($okruhOptions as $okruhOption) : ?>
                 <option value="<?= $okruhOption->idOkruh ?>" <?= ($book->Okruh_idOkruh == $okruhOption->idOkruh) ? 'selected' : '' ?>>
                     <?= $okruhOption->nazev ?>
                 </option>

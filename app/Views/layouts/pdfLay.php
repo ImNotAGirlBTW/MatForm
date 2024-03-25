@@ -7,7 +7,7 @@
     <style type="text/css" media="all" >
   body {
      font-family: "DejaVu Sans", sans-serif;
-     font-size: 95%; 
+     font-size: 80%; 
     }
 
     h1{
@@ -18,7 +18,11 @@
         border-collapse: collapse;
 
     }
-    .informace td,tr {
+    .container{
+        height: 700px;
+    }
+
+    .informace td,tr{
   border: 1px solid;
 }
 
@@ -29,16 +33,41 @@
         width: 600px;
     }
 
+
     .table{
         border-collapse: collapse;
+        width: 700px;
     }
 
     .table, td,tr,th{
         border: 1px solid;
+        text-align: left;
     }
 
+
+
     .podpis{
+        padding-top: 13%;
         text-align: right;
+    }
+ 
+    
+    .legenda tr,td{
+        text-align: left;
+        border-color:white;
+        font-size: 80%;  
+    }
+    .legenda table{
+        margin: 0 auto;
+    }
+    
+    p { 
+        font-size: 80%; 
+        margin:0
+         }
+
+    .bottom{
+        position: bottom;
     }
 </style>
 </head>
