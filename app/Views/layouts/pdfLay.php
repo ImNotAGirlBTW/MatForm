@@ -41,7 +41,7 @@
 
     .table, td,tr,th{
         border: 1px solid;
-        text-align: center;
+        text-align: left;
     }
 
 

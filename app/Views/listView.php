@@ -32,7 +32,7 @@
         <td>
 
         <?= 
-        $user['username'] ?>
+        isset($user['username']) ?>
         </td>
     </tr>
 
@@ -41,7 +41,7 @@
             Třída:
         </th>
         <td>
-            <?= $group?>
+        <?= isset($group)?>
         </td>
     </tr>
 

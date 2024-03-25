@@ -47,7 +47,7 @@ $pngbase64 = base64_encode($png); ?>
 
                         <tr>
                             <th><?= $count++ . "." ?></th>
-                            <th><?= $one['autor'] . ": " . $one['nazev']; ?></th>
+                            <th><?= $one['autor'] . ": " . $one['dilo']; ?></th>
                             <th><?= $one['okruh'] ?></th>
                         <?php endforeach; ?>
             </table>

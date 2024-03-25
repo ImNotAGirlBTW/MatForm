@@ -39,20 +39,20 @@ class Insert extends BaseController {
             $sheet = $spreadsheet->getActiveSheet();
 
            
-            $allData = $sheet->rangeToArray('A1:' . $sheet->getHighestColumn() . $sheet->getHighestRow(), null, true, true, true);
+            $allData = $sheet->rangeToArray('D16:' . $sheet->getHighestColumn() . $sheet->getHighestRow(), null, true, true, true);
     
         
             foreach ($allData as $rowData) {
                 
-                if (empty($rowData['A']) || stripos(implode('', $rowData), 'Autor') !== false) {
+                if (empty($rowData['D']) || stripos(implode('', $rowData), 'Autor') !== false) {
                     continue;
                 }
     
                
-                $kniha = $rowData['A'];
-                $autor = $rowData['B'];
-                $zanrName = $rowData['C'];
-                $okruhName = $rowData['D'];
+                $kniha = $rowData['D'];
+                $autor = $rowData['E'];
+                $zanrName = $rowData['F'];
+                $okruhName = $rowData['G'];
 
                 $zanrRow = $zanrModel->where('nazev', $zanrName)->first();
             $zanrId = $zanrRow ? $zanrRow['idZanr'] : null;
@@ -98,16 +98,17 @@ class Insert extends BaseController {
         $existingRecord = $this->zanrModel->where('nazev', $nazev)->first();
 
         if ($existingRecord) {
-            echo "Kniha již existuhe";
+        echo "Záznam již existuje";
+        }else{
             $zanrData = [
                 'nazev' => $nazev,
                 'popis' => $popis,
                 'pocet' => $pocet,
             ];
-
-            $this->zanrModel->insert($zanrData);
-
-            return redirect()->to('insertCond');
+            var_dump($zanrData);
+            die;
+           // $this->zanrModel->insert($zanrData);
+          //  return redirect()->to('insertCond');
         }
     }
 
@@ -121,7 +122,7 @@ class Insert extends BaseController {
         $existingRecord = $this->okruhModel->where('nazev', $nazev)->first();
 
         if ($existingRecord) {
-            echo "Už to existuje blbečku!";
+            echo "Záznam už existuje";
         } else {
             $okruhData = [
                 'nazev' => $nazev,

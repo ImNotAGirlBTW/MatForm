@@ -23,7 +23,6 @@ class Cont extends BaseController
 {
     private $dompdf;
     private $booksModel;
-   // private $mod;
     private $condModel;
     private $condModel2;
     private $LoadModel;
@@ -48,10 +47,11 @@ class Cont extends BaseController
         $this->userMod = new User();
         $this->yearMod = new Year();
 
-$options = new Options();
+        $options = new Options();
 $options->set('isHtml5ParserEnabled', true);
 $options->set('isPhpEnabled', true);
 $this->dompdf = new Dompdf($options);
+
     }
 
     public function getList()
@@ -151,7 +151,7 @@ $this->dompdf = new Dompdf($options);
             }
         if(isset($this->user))
         {
-       
+     
             $existingData = $this->saveMod->where('Users_idUsers',$this->user['id'])->get()->getResult();
             if(!empty($existingData)){
             $this->saveMod->where('Users_idUsers', $this->user['id'])->delete();
@@ -186,11 +186,14 @@ $this->dompdf = new Dompdf($options);
     }
 
     public function allBooksPdf(){
-      $data['books'] = $this->booksModel->select('*,okruh.nazev as okruh')->join('okruh','okruh.idokruh=kniha.Okruh_idOKruh')->findAll();
+      $data['books'] = $this->booksModel->select('*,kniha.nazev as dilo,okruh.nazev as okruh')->join('okruh','okruh.idOkruh=kniha.Okruh_idOKruh')->findAll();
       $data['zanr'] = $this->zanrModel->FindAll();
       $data['okruh'] = $this->okruhModel->findAll();
-      $data['year'] = $this->yearMod->get()->getResult()[0];
-      $view = view('pdfBooks',$data);
+     $data['year'] = $this->yearMod->get()->getResult()[0];
+
+
+      $view = view('pdfBooks',['books' => $data['books'], 'zanr' => $data['zanr'], 'okruh' => $data['okruh'], 'year' => $data['year']]);
+   
       $this->dompdf->loadHtml($view);
 
       $this->dompdf->setPaper('A4', 'portait');

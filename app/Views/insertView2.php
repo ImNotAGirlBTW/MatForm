@@ -52,15 +52,19 @@ function addNewForm() {
     formCount++;
     
     clonedForm.id = 'mainForm' + formCount;
-
     clonedForm.reset();
 
     document.querySelector('.container').appendChild(clonedForm);
 }
 
 function submitAllForms() {
+    console.log("Submit all forms button clicked."); // Check if function is called
     const forms = document.querySelectorAll('form[id^="mainForm"]');
-    forms.forEach(form => form.submit());
+    forms.forEach(form => {
+        if (form.checkValidity()) { 
+            form.submit();
+        }
+    });
 }
 </script>
 
