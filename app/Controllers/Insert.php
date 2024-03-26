@@ -39,20 +39,20 @@ class Insert extends BaseController {
             $sheet = $spreadsheet->getActiveSheet();
 
            
-            $allData = $sheet->rangeToArray('D16:' . $sheet->getHighestColumn() . $sheet->getHighestRow(), null, true, true, true);
+            $allData = $sheet->rangeToArray('A1:' . $sheet->getHighestColumn() . $sheet->getHighestRow(), null, true, true, true);
     
         
             foreach ($allData as $rowData) {
                 
-                if (empty($rowData['D']) || stripos(implode('', $rowData), 'Autor') !== false) {
+                if (empty($rowData['A']) || stripos(implode('', $rowData), 'Autor') !== false) {
                     continue;
                 }
     
                
-                $kniha = $rowData['D'];
-                $autor = $rowData['E'];
-                $zanrName = $rowData['F'];
-                $okruhName = $rowData['G'];
+                $kniha = $rowData['A'];
+                $autor = $rowData['B'];
+                $zanrName = $rowData['C'];
+                $okruhName = $rowData['D'];
 
                 $zanrRow = $zanrModel->where('nazev', $zanrName)->first();
             $zanrId = $zanrRow ? $zanrRow['idZanr'] : null;

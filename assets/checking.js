@@ -25,7 +25,6 @@ for (let i = 0; i < conditions1.length; i++) {
 function handleOnClick() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
-    const checkedCheckboxIds = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.id);
     totalCount = checkedCheckboxes.length;
     const checkedValues = checkedCheckboxes.map(checkbox => checkbox.value);
     const selectedValues = [];
@@ -104,7 +103,7 @@ function checkSelectedBooks(selectedValues) {
                 document.getElementById(`total_count`).textContent = `${condPocet - totalCount}`;
                 document.getElementById(`total_count`).style.backgroundColor = 'white';
             }
-            
+          
             for (const condition of conditions1) {
                 if (zanrCounts[condition.zanr] >= parseInt(condition.zPocet, 10)) {
                     zanrCon[condition.zanr] = 1;

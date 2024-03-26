@@ -50,6 +50,6 @@ $routes->get('login', 'AuthLog::login');
 $routes->get('callback', 'AuthLog::callback');
 $routes->get('logout', 'AuthLog::logout');
 
-$routes->post('saveData','Insert2::saveData');
+//$routes->post('saveData','Insert2::saveData');
 
-$routes->post('editForm','Login::process_data');
+//$routes->post('editForm','Login::process_data');
