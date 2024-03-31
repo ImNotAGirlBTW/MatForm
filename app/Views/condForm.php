@@ -22,34 +22,10 @@
 
         <br><br>
         <hr>
-        <button type="submit">ff</button>
+        <button type="submit" class="btn btn-primary btn-block" >Odeslat</button>
         <?php echo form_close(); ?>
     </div>
 </div>
-<div class="mt-1 d-flex justify-content-center align-items-center">
-    <button type="button" class="btn btn-primary btn-block" onclick="submitAllForms()">Odeslat</button>
-    <button type="button" class="btn btn-success btn-block" onclick="addNewForm()">+</button>
-</div>
-<script>
-    let formCount = 1;
-
-    function addNewForm() {
-        const mainForm = document.getElementById('mainForm1');
-        const clonedForm = mainForm.cloneNode(true);
-        formCount++;
-
-        clonedForm.id = 'mainForm' + formCount;
-
-        clonedForm.reset();
-
-        document.querySelector('.container').appendChild(clonedForm);
-    }
-
-    function submitAllForms() {
-        const forms = document.querySelectorAll('form[id^="mainForm"]');
-        forms.forEach(form => form.submit());
-    }
-</script>
 
 
 <?= $this->endSection(); ?>

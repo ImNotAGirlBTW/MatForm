@@ -3,12 +3,15 @@
 <?= $this->section('content'); ?>
 <div class="wrap">
     <div class="container form-container">
-        <h2>Edit Book</h2>
         <?php echo helper('form'); ?>
         <?php echo form_open('save/book', ['id' => 'editForm']); ?>
 
         <input type="hidden" name="idKniha" value="<?= $book->idKniha ?>">
+        <label for="autor">Autor:</label>
+        <input type="text" name="autor" id="autor" class="form-control" value="<?= $book->autor ?>" required>
 
+        <br><br>
+        
         <label for="nazev">Dílo:</label>
         <input type="text" name="nazev" id="nazev" class="form-control" value="<?= $book->nazev ?>" required>
 
@@ -37,10 +40,7 @@
 
         <br><br>
 
-        <label for="autor">Autor:</label>
-        <input type="text" name="autor" id="autor" class="form-control" value="<?= $book->autor ?>" required>
-
-        <br><br>
+   
 
         <button type="submit" class="btn btn-primary btn-block">Uložit změny</button>
 

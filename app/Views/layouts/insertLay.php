@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vložení děl</title>
+  <title>Dashboard-admin</title>
   <link href="<?= base_url('/vendor/twbs/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
 <script src="<?= base_url('vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js')?>"></script>
 
@@ -55,7 +55,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href=" <?= base_url("insert") ?>">Dílo</a></li>
               <li><a class="dropdown-item" href=" <?= base_url("insertView") ?>">Excel</a></li>
-              <li><a class="dropdown-item" href="<?= base_url("insertCond") ?>">Žánr</a></li>
+              <li><a class="dropdown-item" href="<?= base_url("insertCond") ?>">Druh</a></li>
               <li><a class="dropdown-item" href="<?= base_url("insertCond2") ?>">Okruh</a></li>
             </ul>
           </li>

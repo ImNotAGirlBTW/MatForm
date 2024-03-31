@@ -84,25 +84,36 @@ class AuthLog extends Controller
                 $userModel = $graph->createRequest('GET', '/me')
                     ->setReturnType(ModelUser::class)
                     ->execute();
-
+                
                 $existingUser = (new User())->where('email', $userModel->getMail())->first();
                 $group = $userModel->getJobTitle();
                 if ($existingUser) {
                     $session->set('user', $existingUser);
                     $session->set('userGroup', $group);
-
                     return redirect()->to('/');
                 } else {
-                    $newUser = (new User())->insert([
-                        'username' => $userModel->getDisplayName(),
-                        'email' => $userModel->getMail(),
-                        'isAdmin' => 0,
-                    ]);
-                    $newUserS = (new User())->where('email', $userModel->getMail())->first();
-                    $newUserGroup = $userModel->getJobTitle();
-                    $session->set('user', $newUserS);
-                    $session->set('group', $newUserGroup);
-                    return redirect()->to('/');
+                    if ($group = "učitel") {
+                        (new User())->insert([
+                            'username' => $userModel->getDisplayName(),
+                            'email' => $userModel->getMail(),
+                            'isAdmin' => 1,
+                        ]);
+                        $newUserAdmin = (new User())->first();
+                        $newAdminGroup = $userModel->getJobTitle();
+                        $session->set('user', $newUserAdmin);
+                        $session->set('group', $newAdminGroup);
+                    } else {
+                        (new User())->insert([
+                            'username' => $userModel->getDisplayName(),
+                            'email' => $userModel->getMail(),
+                            'isAdmin' => 0,
+                        ]);
+                        $newUserS = (new User())->first();
+                        $newUserGroup = $userModel->getJobTitle();
+                        $session->set('user', $newUserS);
+                        $session->set('group', $newUserGroup);
+                        return redirect()->to('/');
+                    }
                 }
 
                 return redirect()->to('');

@@ -31,8 +31,12 @@
         </th>
         <td>
 
-        <?= 
-        isset($user['username']) ?>
+        <?php
+        if($user){
+           echo  $user['username'];
+        }
+        ?>
+         
         </td>
     </tr>
 
@@ -41,7 +45,11 @@
             Třída:
         </th>
         <td>
-        <?= isset($group)?>
+        <?php
+        if($user){  
+        echo $group;
+         }
+         ?>
         </td>
     </tr>
 
@@ -77,16 +85,16 @@
                 <th><?= $one->okruh?></th>
                 <?php
                 if($one->zanr == "Poe"){
-                echo "<th>*</th>";
-                echo "<th></th>";
+                echo "<td>*</td>";
+                echo "<td></td>";
                 $proCount ++;
                 }elseif($one->zanr == "Dra"){
-                    echo "<th></th>";
-                    echo "<th>*</th>";
+                    echo "<td></td>";
+                    echo "<td>*</td>";
                     $draCount ++;
                 }else{
-                    echo "<th></th>";
-                    echo "<th></th>"; 
+                    echo "<td></td>";
+                    echo "<td></td>"; 
                 }
                 ?>
             <?php endforeach; ?>
@@ -95,8 +103,8 @@
                 <th style="border-color:white"></th>
                 <th style="border-color:white; border-right: 1px solid"></th>
 
-                <th><?=$proCount?></th>
-                <th><?=$draCount?></th>
+                <td><?=$proCount?></td>
+                <td><?=$draCount?></td>
             </tr>
     </table>
         </div>

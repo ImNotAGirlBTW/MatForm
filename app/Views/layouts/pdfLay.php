@@ -39,11 +39,14 @@
         width: 700px;
     }
 
-    .table, td,tr,th{
+    .table,tr,th{
         border: 1px solid;
         text-align: left;
     }
-
+    .table td{
+        border: 1px solid;
+        text-align: center;
+    }
 
 
     .podpis{

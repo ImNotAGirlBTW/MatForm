@@ -99,11 +99,14 @@ function checkSelectedBooks(selectedValues) {
             if (condPocet - totalCount == 0) {
                 document.getElementById(`total_count`).style.backgroundColor = '#0FFF50';
                 document.getElementById(`total_count`).textContent = "SPLNĚNO";
+            } else if (condPocet - totalCount < 0) {
+                document.getElementById('total_count').style.backgroundColor = '#FF0000';
+                document.getElementById('total_count').textContent = `Nutno odebrat ${(condPocet - totalCount) * -1}`;
             } else {
                 document.getElementById(`total_count`).textContent = `${condPocet - totalCount}`;
                 document.getElementById(`total_count`).style.backgroundColor = 'white';
             }
-          
+
             for (const condition of conditions1) {
                 if (zanrCounts[condition.zanr] >= parseInt(condition.zPocet, 10)) {
                     zanrCon[condition.zanr] = 1;
@@ -187,12 +190,12 @@ function validateForm() {
 
 
 function preslectCheckbox(checkboxID) {
-    for(const id of checkboxID){
+    for (const id of checkboxID) {
         const checkbox = document.getElementById(id.Kniha_idKniha);
         if (checkbox) {
             checkbox.checked = true;
         }
     }
-handleOnClick();
+    handleOnClick();
 
 }
