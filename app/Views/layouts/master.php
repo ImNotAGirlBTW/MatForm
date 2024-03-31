@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="<?= base_url('/assets/mainForm.css') ?>" rel="stylesheet">
+  <title>Formulář</title>
   <link href="<?= base_url('/vendor/twbs/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('/assets/mainForm.css') ?>" rel="stylesheet">
 
 </head>
 
@@ -14,7 +14,7 @@
   <?php
   if ($user == null || $user['isAdmin'] != 1) { ?>
     <nav class="navbar navbar-light bg-light">
-      <span class="navbar-brand mb-0 h1">Logo?</span>
+      <img  style="padding-left: 10px;" width="50" height="40"  src="<?= base_url('images/logo.png')?>" alt="logo">
       <ul class="navbar-nav d-flex mb-2 mb-lg-0">
         <li class="nav-item" style="padding-right: 10px;">
           <?php if ($user) { ?>
@@ -50,7 +50,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href=" <?= base_url("insert") ?>">Dílo</a></li>
               <li><a class="dropdown-item" href=" <?= base_url("insertView")?>">Excel</a></li>
-              <li><a class="dropdown-item" href="<?= base_url("insertCond")?>">Žánr</a></li>
+              <li><a class="dropdown-item" href="<?= base_url("insertCond")?>">Druh</a></li>
               <li><a class="dropdown-item" href="<?= base_url("insertCond2")?>">Okruh</a></li>
             </ul>
           </li>
@@ -58,7 +58,7 @@
       </div>
       <ul class="navbar-nav d-flex mb-2 mb-lg-0">
         <li class="nav-item" style="padding-right: 10px;">
-          <a class="nav-link" href="'. base_url('logout') .'">Odhlásit se</a>
+          <a class="nav-link" href="<?= base_url('logout') ?>">Odhlásit se</a>
         </li>
       </ul>
     </div>

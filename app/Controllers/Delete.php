@@ -44,13 +44,20 @@ class Delete extends BaseController
             $this->zanrModel->where('idZanr', $id)->delete();
             return redirect()->to('editCond');
         } else {
-            echo "Něco se nepovedlo!";
+            echo "Něco se nepovedlo!";  
         }
     }
 
     public function delete3($id)
     {
         $entity = $this->okruhModel->where('idOkruh', $id)->get()->getResult();
+        $books = $this->BooksModel->where('Okruh_idOkruh', $id)->get()->getResult();
+
+
+        if ($books) {
+            $this->BooksModel->where('Okruh_idOkruh', $id)->delete();
+        }
+
         if ($entity) {
             $this->okruhModel->where('idOkruh', $id)->delete();
             return redirect()->to('editCond');
@@ -59,13 +66,13 @@ class Delete extends BaseController
         }
     }
 
-        public function deleteUser($id)
+    public function deleteUser($id)
     {
         $entity = $this->userModel->where('id', $id)->get()->getResult();
         $entitySave =  $this->saveModel->where('Users_idUsers', $id)->get()->getResult();
 
-        if($entitySave){
-            $this->saveModel->where('Users_idUsers',$id)->delete();
+        if ($entitySave) {
+            $this->saveModel->where('Users_idUsers', $id)->delete();
         }
         if ($entity) {
             $this->userModel->where('id', $id)->delete();
@@ -74,5 +81,4 @@ class Delete extends BaseController
             echo "Něco se nepovedlo!";
         }
     }
-    
 }

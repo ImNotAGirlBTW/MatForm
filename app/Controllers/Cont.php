@@ -115,7 +115,7 @@ class Cont extends BaseController
         }
         $saveData = array();
         foreach ($values as $key => $val) {
-          $id = $key;
+          $id = $key; 
           $saveData[] = [
             'Users_idUsers' => $this->user['id'],
             'Kniha_idKniha' => $id,
@@ -134,7 +134,7 @@ class Cont extends BaseController
 
       $this->dompdf->render();
 
-      $this->dompdf->stream('SnadNeVirus', array("Attachment" => 0));
+      $this->dompdf->stream($this->user['username'] . "-seznam-maturitni-cetby", array("Attachment" => 0));
     }
 
     return view('formView', $data);
@@ -146,6 +146,7 @@ class Cont extends BaseController
     $data['zanr'] = $this->zanrModel->FindAll();
     $data['okruh'] = $this->okruhModel->findAll();
     $data['year'] = $this->yearMod->get()->getResult()[0];
+   
 
 
     $view = view('pdfBooks', ['books' => $data['books'], 'zanr' => $data['zanr'], 'okruh' => $data['okruh'], 'year' => $data['year']]);
@@ -153,9 +154,9 @@ class Cont extends BaseController
     $this->dompdf->loadHtml($view);
 
     $this->dompdf->setPaper('A4', 'portait');
-
+    
     $this->dompdf->render();
-
-    $this->dompdf->stream('SnadNeVirus', array("Attachment" => 0));
+   
+    $this->dompdf->stream( "Seznam-cetby-k-ustni-casti-maturitní-zkousky", array("Attachment" => 0));
   }
 }
